@@ -14,9 +14,9 @@ Open `index.html` directly, or run any static HTTP server from this folder.
 
 No build command is required.
 
-## Replace the profile image
+## Profile image
 
-LinkedIn did not expose the original profile photo to the public web session used for this build. Export the authorized photo as `assets/manvendra-profile.webp`, then change the hero image in `index.html` from `assets/manvendra-monogram.svg` to that file. Use a portrait around 720 × 840 px for the intended crop.
+The hero uses the supplied photo at `assets/manvendra-profile.png`. Replace that file to update the image without changing the page markup.
 
 ## Add verified achievements and certificates
 

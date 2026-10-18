@@ -6,7 +6,7 @@
 
   const applyTheme = (theme) => {
     root.dataset.theme = theme;
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#0b1020' : '#edf3ff');
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#071624' : '#eef5fa');
     themeButtons.forEach((button) => button.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`));
   };
   applyTheme(storedTheme || preferredTheme);
