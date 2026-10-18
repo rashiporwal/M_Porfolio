@@ -47,6 +47,11 @@
           <a class="button button-primary magnetic" href="#experience">Explore my approach <span aria-hidden="true">↘</span></a>
           <a class="button button-quiet" href="mailto:manav.pec@gmail.com">Start a conversation</a>
         </div>
+        <button class="resume-box glass" type="button" data-dialog-open="resume-dialog">
+          <span class="resume-box-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3.5h7l4 4v13H7z"/><path d="M14 3.5v4h4M10 12h5M10 15.5h5"/></svg></span>
+          <span class="resume-box-copy"><strong>Résumé</strong><small>PDF preview coming soon</small></span>
+          <span class="resume-box-arrow" aria-hidden="true">↗</span>
+        </button>
         <ul class="signal-row" aria-label="Core strengths">
           <li><span></span> Structured planning</li>
           <li><span></span> Stakeholder alignment</li>
@@ -160,6 +165,8 @@
           <a class="email-link" href="mailto:manav.pec@gmail.com">manav.pec@gmail.com <span>↗</span></a>
           <a class="button button-primary" href="mailto:manav.pec@gmail.com?subject=Project%20Management%20Opportunity">Discuss an opportunity</a>
           <a class="button button-quiet" href="https://www.linkedin.com/in/manvendrasingh1986/" target="_blank" rel="noreferrer">Connect on LinkedIn</a>
+          <button class="button button-download" type="button" disabled aria-describedby="resume-availability">Download résumé <span aria-hidden="true">↓</span></button>
+          <p class="resume-availability" id="resume-availability">The résumé PDF will be available here soon.</p>
         </div>
       </div>
     </section>
@@ -170,5 +177,11 @@
     <p>Built around clarity, craft, and considerate momentum.</p>
     <p>© <span data-year></span> Manvendra Singh</p>
   </footer>
+  <dialog class="resume-dialog glass" id="resume-dialog" aria-labelledby="resume-dialog-title">
+    <button class="dialog-close" type="button" data-dialog-close aria-label="Close résumé notice">×</button>
+    <span class="dialog-kicker">Résumé</span>
+    <h2 id="resume-dialog-title">PDF coming soon</h2>
+    <p>Manvendra’s résumé will be available to preview and download here once the document is added.</p>
+  </dialog>
 </body>
 </html>

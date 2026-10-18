@@ -21,3 +21,7 @@ The hero uses the supplied photo at `assets/manvendra-profile.png`. Replace that
 ## Add verified achievements and certificates
 
 The portfolio intentionally avoids inventing private LinkedIn details. Replace or expand the themed items in `achievements.html` and `certificates.html` with verified role outcomes, credential names, issuer dates, and certificate assets.
+
+## Add the résumé PDF
+
+The portfolio currently shows a résumé preview notice and a disabled download control. Once the original PDF is supplied, place it at `assets/manvendra-singh-resume.pdf`, point the preview dialog to that file, and convert the Contact button into a download link. Copy the same PDF to `dist/assets/` before publishing the hosted build.
