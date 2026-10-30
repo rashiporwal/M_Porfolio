@@ -145,6 +145,28 @@
       });
       button.addEventListener('pointerleave', () => { button.style.transform = ''; });
     });
+
+    if (matchMedia('(pointer: fine)').matches) {
+      document.querySelectorAll('[data-tilt]').forEach((element) => {
+        let frame;
+        element.addEventListener('pointermove', (event) => {
+          if (frame) cancelAnimationFrame(frame);
+          frame = requestAnimationFrame(() => {
+            const rect = element.getBoundingClientRect();
+            const x = (event.clientX - rect.left) / rect.width - .5;
+            const y = (event.clientY - rect.top) / rect.height - .5;
+            const range = element.classList.contains('portrait-frame') ? 4 : 2.2;
+            element.style.setProperty('--tilt-x', `${-y * range}deg`);
+            element.style.setProperty('--tilt-y', `${x * range}deg`);
+          });
+        });
+        element.addEventListener('pointerleave', () => {
+          if (frame) cancelAnimationFrame(frame);
+          element.style.setProperty('--tilt-x', '0deg');
+          element.style.setProperty('--tilt-y', '0deg');
+        });
+      });
+    }
   }
 
   document.querySelectorAll('[data-year]').forEach((element) => { element.textContent = new Date().getFullYear(); });
