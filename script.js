@@ -80,6 +80,42 @@
   }, { threshold: 0.08, rootMargin: '0px 0px -5% 0px' });
   document.querySelectorAll('[data-stagger]').forEach((element) => staggerObserver.observe(element));
 
+  const metricSection = document.querySelector('[data-metrics]');
+  const counters = [...document.querySelectorAll('[data-counter]')];
+  const setCounterValue = (counter, value) => {
+    const prefix = counter.dataset.prefix || '';
+    const suffix = counter.dataset.suffix || '';
+    counter.textContent = `${prefix}${Math.round(value).toLocaleString('en-IN')}${suffix}`;
+  };
+
+  if (metricSection && counters.length) {
+    if (reducedMotion) {
+      counters.forEach((counter) => setCounterValue(counter, Number(counter.dataset.counter)));
+    } else {
+      const metricObserver = new IntersectionObserver((entries) => {
+        const entry = entries[0];
+        if (!entry?.isIntersecting) return;
+        metricSection.classList.add('is-counting');
+        counters.forEach((counter, index) => {
+          const target = Number(counter.dataset.counter);
+          const duration = 1250 + index * 110;
+          const start = performance.now();
+          setCounterValue(counter, 0);
+
+          const count = (now) => {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 4);
+            setCounterValue(counter, target * eased);
+            if (progress < 1) requestAnimationFrame(count);
+          };
+          requestAnimationFrame(count);
+        });
+        metricObserver.unobserve(metricSection);
+      }, { threshold: .35 });
+      metricObserver.observe(metricSection);
+    }
+  }
+
   const sections = [...document.querySelectorAll('main section[id]:not(#home)')];
   const navLinks = [...document.querySelectorAll('.primary-nav a')];
   if (sections.length && navLinks.length) {

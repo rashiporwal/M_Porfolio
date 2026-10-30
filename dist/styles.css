@@ -122,3 +122,16 @@
 [data-theme="light"] .button-secondary{background:#fff;border-color:rgba(34,64,102,.34)}
 .availability i,.timeline-item.current::before{background:var(--technical);box-shadow:0 0 0 5px color-mix(in srgb,var(--technical) 12%,transparent),0 0 18px color-mix(in srgb,var(--technical) 42%,transparent)}
 .portrait-caption .status-chip{color:var(--technical);border-color:color-mix(in srgb,var(--technical) 38%,transparent)}
+
+/* Dynamic career metrics */
+.metric-strip article{position:relative;isolation:isolate;overflow:hidden;transition:transform .4s cubic-bezier(.16,1,.3,1),background .35s ease}
+.metric-strip article::before{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 13%,transparent),color-mix(in srgb,var(--technical) 5%,transparent));transform:scaleY(0);transform-origin:bottom;transition:transform .55s cubic-bezier(.16,1,.3,1)}
+.metric-strip article::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--technical));transform:scaleX(0);transform-origin:left;transition:transform .65s cubic-bezier(.16,1,.3,1)}
+.metric-strip article:hover{transform:translateY(-7px)}
+.metric-strip article:hover::before,.metric-strip article:hover::after,.metric-strip.is-counting article::after{transform:scale(1)}
+.metric-strip strong{font-variant-numeric:tabular-nums;will-change:transform,opacity}
+.metric-strip.is-counting strong{animation:metricRise .75s cubic-bezier(.16,1,.3,1) both}
+.metric-strip.is-counting article:nth-child(2) strong{animation-delay:.08s}.metric-strip.is-counting article:nth-child(3) strong{animation-delay:.16s}.metric-strip.is-counting article:nth-child(4) strong{animation-delay:.24s}
+.metric-strip.is-counting article:nth-child(2)::after{transition-delay:.08s}.metric-strip.is-counting article:nth-child(3)::after{transition-delay:.16s}.metric-strip.is-counting article:nth-child(4)::after{transition-delay:.24s}
+@keyframes metricRise{from{opacity:.2;transform:translateY(20px);filter:blur(5px)}to{opacity:1;transform:none;filter:none}}
+@media(prefers-reduced-motion:reduce){.metric-strip article,.metric-strip article::before,.metric-strip article::after{transition:none}.metric-strip.is-counting strong{animation:none}}
