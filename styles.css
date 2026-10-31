@@ -271,3 +271,11 @@
 [data-theme="light"] .resume-download:hover{background:linear-gradient(135deg,#f8fbff,#dceafd);box-shadow:6px 8px 0 rgba(55,104,191,.1)}
 @media(max-width:760px){.header-resume{width:49px;min-width:49px;padding:0;justify-content:center}.header-resume span{display:none}.header-resume b{font-size:8px}.contact-resume{width:100%}}
 @media(prefers-reduced-motion:reduce){.resume-download::before{display:none}}
+
+/* Portfolio credit */
+[data-theme="light"] .footer-credit{color:#415675}
+.footer-credit{position:relative;padding-left:18px;white-space:nowrap;color:var(--muted)}
+.footer-credit::before{content:"";position:absolute;left:0;top:50%;width:8px;height:1px;background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:0 0 10px color-mix(in srgb,var(--accent) 55%,transparent)}
+.footer-credit span{color:var(--text);background:linear-gradient(105deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
+@media(min-width:761px) and (max-width:1040px){.site-footer{grid-template-columns:1fr auto}.site-footer>p{justify-self:end}}
+@media(max-width:760px){.footer-credit{width:fit-content}}
