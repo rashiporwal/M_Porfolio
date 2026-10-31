@@ -337,3 +337,23 @@
   [data-theme="light"] .theme-toggle i{transform:translateX(0)}
   .header-resume{width:44px;min-width:44px}
 }
+
+/* Explicit header placement prevents controls from wrapping into a second grid row */
+.site-header{
+  grid-template-areas:"brand nav actions";
+  grid-template-rows:var(--nav-control);
+  grid-auto-rows:0;
+}
+.site-header>.brand{grid-area:brand;grid-row:1;align-self:center}
+.site-header>.menu-toggle{grid-area:menu;grid-row:1;align-self:center;order:0}
+.site-header>.primary-nav{grid-area:nav;grid-row:1;align-self:center}
+.site-header>.header-actions{grid-area:actions;grid-row:1;align-self:center}
+
+@media(max-width:1180px){
+  .site-header{grid-template-columns:minmax(0,1fr) auto var(--nav-control);grid-template-areas:"brand actions menu";grid-template-rows:var(--nav-control)}
+  .site-header>.primary-nav{grid-area:auto;grid-row:auto;grid-column:auto}
+}
+
+@media(max-width:640px){
+  .site-header{grid-template-columns:minmax(0,1fr) auto var(--nav-control);grid-template-areas:"brand actions menu";grid-template-rows:var(--nav-control)}
+}
