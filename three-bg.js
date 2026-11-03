@@ -40,15 +40,17 @@ if (canvas && !navigator.connection?.saveData) {
         depthWrite: false
       });
 
-      const polyhedron = new THREE.Mesh(new THREE.IcosahedronGeometry(2.25, 1), primaryMaterial);
-      polyhedron.position.set(compact ? 2.6 : 4.3, 1.45, -1.8);
-      polyhedron.rotation.set(0.25, 0.5, -0.18);
-      field.add(polyhedron);
+      const sphereGeometry = new THREE.SphereGeometry(2.15, compact ? 12 : 18, compact ? 8 : 12);
+      const sphere = new THREE.Mesh(sphereGeometry, primaryMaterial);
+      sphere.position.set(compact ? 2.45 : 4.25, 1.35, -2.1);
+      sphere.rotation.set(0.15, 0.45, -0.12);
+      field.add(sphere);
 
-      const ring = new THREE.Mesh(new THREE.TorusKnotGeometry(1.7, 0.24, compact ? 56 : 84, 7, 2, 3), secondaryMaterial);
-      ring.position.set(compact ? -2.3 : -4.6, -2.1, -2.8);
-      ring.rotation.set(-0.5, 0.25, 0.45);
-      field.add(ring);
+      const cubeGeometry = new THREE.BoxGeometry(3.2, 2.35, 2.35, compact ? 2 : 3, 2, 2);
+      const cube = new THREE.Mesh(cubeGeometry, secondaryMaterial);
+      cube.position.set(compact ? -2.25 : -4.45, -2.05, -2.9);
+      cube.rotation.set(-0.35, 0.55, 0.18);
+      field.add(cube);
 
       const particleCount = compact ? 54 : 110;
       const positions = new Float32Array(particleCount * 3);
@@ -110,9 +112,11 @@ if (canvas && !navigator.connection?.saveData) {
           previous = time;
           if (!reducedMotion) {
             const speed = time * 0.00008;
-            polyhedron.rotation.y = 0.5 + speed;
-            polyhedron.rotation.x = 0.25 + Math.sin(speed * 1.4) * 0.12;
-            ring.rotation.z = 0.45 - speed * 0.75;
+            sphere.rotation.y = 0.45 + speed;
+            sphere.rotation.x = 0.15 + Math.sin(speed * 1.4) * 0.1;
+            cube.rotation.y = 0.55 - speed * 0.72;
+            cube.rotation.x = -0.35 + Math.sin(speed * 1.1) * 0.14;
+            cube.rotation.z = 0.18 + speed * 0.28;
             particles.rotation.y = speed * 0.12;
             current.x += (pointer.x - current.x) * 0.035;
             current.y += (pointer.y - current.y) * 0.035;
@@ -129,6 +133,8 @@ if (canvas && !navigator.connection?.saveData) {
         cancelAnimationFrame(frame);
         themeObserver.disconnect();
         renderer.dispose();
+        sphereGeometry.dispose();
+        cubeGeometry.dispose();
         particleGeometry.dispose();
         particleMaterial.dispose();
         primaryMaterial.dispose();

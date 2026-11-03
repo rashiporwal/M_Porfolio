@@ -169,5 +169,38 @@
     }
   }
 
+  const cursorOrbit = document.querySelector('[data-cursor-orbit]');
+  if (cursorOrbit && !reducedMotion && matchMedia('(pointer: fine)').matches) {
+    document.body.classList.add('cursor-motion-ready');
+    const target = { x: innerWidth / 2, y: innerHeight / 2 };
+    const current = { ...target };
+    let cursorFrame;
+
+    const moveCursor = (event) => {
+      target.x = event.clientX;
+      target.y = event.clientY;
+      cursorOrbit.classList.add('is-visible');
+    };
+    const setInteractive = (event) => {
+      const interactive = event.target.closest?.('a, button, [data-tilt], .project-card, .pipeline-stage');
+      cursorOrbit.classList.toggle('is-interactive', Boolean(interactive));
+    };
+    const animateCursor = () => {
+      current.x += (target.x - current.x) * .16;
+      current.y += (target.y - current.y) * .16;
+      cursorOrbit.style.setProperty('--cursor-x', `${current.x}px`);
+      cursorOrbit.style.setProperty('--cursor-y', `${current.y}px`);
+      cursorFrame = requestAnimationFrame(animateCursor);
+    };
+
+    addEventListener('pointermove', moveCursor, { passive: true });
+    document.addEventListener('pointerover', setInteractive, { passive: true });
+    addEventListener('pointerdown', () => cursorOrbit.classList.add('is-down'), { passive: true });
+    addEventListener('pointerup', () => cursorOrbit.classList.remove('is-down'), { passive: true });
+    document.documentElement.addEventListener('mouseleave', () => cursorOrbit.classList.remove('is-visible'));
+    addEventListener('pagehide', () => cancelAnimationFrame(cursorFrame), { once: true });
+    animateCursor();
+  }
+
   document.querySelectorAll('[data-year]').forEach((element) => { element.textContent = new Date().getFullYear(); });
 })();
