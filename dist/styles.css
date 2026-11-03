@@ -491,3 +491,9 @@
 @keyframes cursorOrbitSpin{to{transform:rotate(360deg)}}
 @media(pointer:coarse){.cursor-orbit{display:none}}
 @media(prefers-reduced-motion:reduce){.cursor-orbit{display:none}}
+
+/* Executive hero statement */
+.hero-statement{max-width:900px;font-size:clamp(42px,5vw,70px);line-height:.94;letter-spacing:-.05em}
+.hero-statement span{display:block}
+.hero-statement span:last-child{width:fit-content;background:linear-gradient(105deg,var(--accent),var(--technical));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--accent)}
+@media(max-width:760px){.hero-statement{font-size:clamp(40px,11.8vw,58px);line-height:.96}.hero-statement span{display:inline}.hero-statement span::after{content:" "}.hero-statement span:last-child{display:inline;background:linear-gradient(105deg,var(--accent),var(--technical));-webkit-background-clip:text;background-clip:text}}
